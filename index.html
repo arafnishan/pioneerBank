@@ -40,13 +40,13 @@
 <div class="container" id="dashboard">
     <div class="row">
         <div class="col-lg-4">
-            Deposit: <span></span>
+            Deposit: $<span id="currentDeposit">00</span>
         </div>
         <div class="col-lg-4">
-            Withdraw: <span></span>
+            Withdraw: $<span ></span>
         </div>
         <div class="col-lg-4">
-            Balance: <span></span>
+            Balance: $<span id="currentBalance">1240</span>
         </div>
     </div>
     <div class="row">
@@ -55,22 +55,22 @@
 
 
                 <div class="form-group">
-                    <label for="number1">Deposit</label>
-                    <input type="number" class="form-control" id="number1" aria-describedby="emailHelp">
+                    <label for="depositValue">Deposit</label>
+                    <input type="number" class="form-control" id="depositValue" aria-describedby="emailHelp">
 
                 </div>
-                <a class="btn btn-success">Deposit</a>
+                <a class="btn btn-success" id="depositButton">Deposit</a>
             </form>
         </div>
         <div class="col-lg-6 m-auto shadow-sm p-5 mb-5 bg-white rounded mt-5">
             <form class="">
 
                 <div class="form-group">
-                    <label for="number2">Withdraw</label>
-                    <input type="number" class="form-control" id="number2" aria-describedby="emailHelp">
+                    <label for="withdrawValue">Withdraw</label>
+                    <input type="number" class="form-control" id="withdrawValue" aria-describedby="emailHelp">
 
                 </div>
-                <a class="btn btn-success">Withdraw</a>
+                <a class="btn btn-success" id="withdrawButton">Withdraw</a>
             </form>
         </div>
     </div>
@@ -90,7 +90,36 @@
     loginButton.addEventListener("click", function () {
         const loginArea = document.getElementById('login-area');
         loginArea.style.display = 'none';
-    });
+
+        const dashboard = document.getElementById('dashboard');
+        dashboard.style.display = 'block';
+    })
+    const depositBtn = document.getElementById('depositButton');
+    depositBtn.addEventListener('click', function () {
+        const depositAmount = document.getElementById('depositValue').value;
+        const depositNumber = parseFloat(depositAmount);
+
+        /*const currentDepositAmount = document.getElementById('currentDeposit').innerText;
+        const currentDepositNumber = parseFloat(currentDepositAmount);
+        const totalDeposit = depositNumber + currentDepositNumber;
+        document.getElementById('currentDeposit').innerText = totalDeposit;
+
+        const currentBalanceAmount = document.getElementById('currentBalance').innerText;
+        const currentBalanceNumber = parseFloat(currentBalanceAmount);
+        const totalBalance = depositNumber + currentBalanceNumber;
+        document.getElementById('currentBalance').innerText = totalBalance;*/
+
+        updateAmount("currentDeposit", depositNumber );
+        updateAmount("currentBalance", depositNumber );
+
+        document.getElementById('depositValue').value = 0;
+    })
+    function updateAmount(id, depositNumber) {
+        const currentAmount = document.getElementById(id).innerText;
+        const currentNumber = parseFloat(currentAmount);
+        const totalBalance = depositNumber + currentNumber;
+        document.getElementById(id).innerText = totalBalance;
+    }
 </script>
 </body>
 </html>
